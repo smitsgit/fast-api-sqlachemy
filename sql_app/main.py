@@ -11,10 +11,15 @@ app = FastAPI()
 
 
 # dependency
-def get_db():
-    db = sessionLocal()
+def get_db(autocommit=False):
+    db: Session = sessionLocal()
     try:
         yield db
+        if autocommit:
+            db.commit()
+    except Exception:
+        db.rollback()
+        raise
     finally:
         db.close()
 
