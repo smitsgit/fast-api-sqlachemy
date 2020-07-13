@@ -40,5 +40,10 @@ sqlalchemy.url = sqlite:///..sql_app.db
 ```shell script
 export PYTHONPATH=export PYTHONPATH=/Users/smital/PycharmProjects/fast-api-sqlachemy
 alembic stamp head
-alembic revision --autogenerate -m "Add the inital schema"
+alembic revision -m "Add the inital schema"
 ```
+
+## Change the model schema 
+```shell script 
+alembic revision --autogenerate -m "Add new columns" 
+alembic upgrade head  # Without this the change wont take place 
